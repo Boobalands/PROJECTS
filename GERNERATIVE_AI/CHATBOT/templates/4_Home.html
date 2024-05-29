@@ -1,0 +1,268 @@
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+            /* CSS Document */
+
+            body {
+            margin: 0;
+            padding: 0;
+                background-color: #eeeeee;
+            }
+
+            .logo {
+            float: left;
+            }
+            /* ~~ Top Navigation Bar ~~ */
+
+            #navigation-container {
+            width: 1200px;
+            margin: 0 auto;
+            height: 100px;
+            }
+
+            .navigation-bar {
+            background: rgba(0, 0, 0, 0.5); 
+            height: 70px;
+            width: 100%;
+            text-align:center;
+                
+            position: fixed; /* Set the navbar to fixed position */
+            top: 0; /* Position the navbar at the top of the page */
+            }
+            .navigation-bar img{
+            float:left;
+                width: 70px;
+                padding: 10px;
+            }
+            .navigation-bar ul {
+            padding: 0px;
+            margin: 0px;
+            text-align: center;
+            display:inline-block;
+            vertical-align:top;
+            }
+
+            .navigation-bar li {
+            list-style-type: none;
+            padding: 0px;
+            height: 24px;
+            margin-top: 4px;
+            margin-bottom: 4px;
+            display: inline;
+            }
+
+            .navigation-bar li a {
+            color: white;
+            font-size: 14px;
+            letter-spacing: 3px;
+            font-family: 'Raleway', sans-serif;
+            text-transform: uppercase;  text-decoration: none;
+            line-height: 70px;
+            padding: 5px 35px;
+            opacity: 0.7;
+            }
+
+            .navigation-bar li a:hover {
+            font-weight: 500;
+            }
+
+            #menu {
+            float: right;
+            }
+
+            .container{
+                background-image: url("/static/images/A95.jpg");
+                background-attachment: fixed;
+                position: relative; top: 0; overflow:scroll;
+                background-repeat: no-repeat;
+                background-size: 100% auto;
+                width: 100%;
+                height: 600px;
+                z-index: 0;
+                top: 0;
+            }
+
+            .row {
+            display: flex; /* equal height of the children */
+            }
+
+            .col {
+            flex: 1; /* additionally, equal width */
+            text-align: center;
+            padding: 70px 30px;
+            }
+
+            .button {
+                background-color: transparent;
+                border: 1px #222222 solid;
+                color: #222222;
+                padding: 15px 32px;
+                text-align: center;font-family: 'Playfair Display SC', serif;
+                font-weight: 700;
+                letter-spacing: 5px;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 16px;
+                margin: 4px 2px;
+                cursor: pointer;
+            }
+
+            .icon-calendar {
+                font-family: 'untitled-font-1';
+            color: #c6aaa1;}
+
+            .icon-map-marker {
+                font-family: 'untitled-font-1';
+            color: #b2c1cb;}
+
+            h1 {
+                font-family: 'Playfair Display', serif;
+                font-size: 20px;
+                font-style: italic;
+                font-weight: 400;
+                line-height: 20px;
+            }
+
+            h2 {
+                font-family: 'Playfair Display', serif;
+            font-size: 20px;
+                line-height: 15px;
+                font-style: italic;
+                font-weight: 400;	
+                color: #b5b5b5;
+                
+            }
+
+            .biglogo {
+                position: fixed;
+                width: 100%;
+                text-align: center;
+                z-index: 99;
+                top: 30%;
+            }
+
+            h3 {
+                font-family: 'Crimson Text', serif;
+                color: #eeeeee;
+                font-weight: 400;
+                font-style: italic;
+                margin-top: -80px;
+                margin-left: 100px;
+                letter-spacing: 5px;
+                word-spacing: 10px;
+            }
+
+            .yellowhighlight {
+                color: #e8da9b;
+            }
+    </style>
+</head>
+<body>
+    <html>
+<head>
+<meta charset="UTF-8">
+<title>HOME</title>
+<link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="https://file.myfontastic.com/4kMD7zPwq8YZAPpovuQHuJ/icons.css" rel="stylesheet"><style>
+ @import url('https://fonts.googleapis.com/css?family=Crimson+Text:400,400i,600i|Playfair+Display+SC:400,700|Playfair+Display:400,400i,700,700i|Raleway:400,500');
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="navigation-bar">
+
+
+    <div id="navigation-container">
+
+      
+      <ul>
+        <li><a href="{% url 'Teamates_5' %}">INNOVATION SQUAD</a></li>
+        <li><a href="{% url 'Login_3' %}">LOGOUT</a></li>
+      </ul>
+    </div><br><br><br>
+
+  </div>
+    
+</div>
+  <center><h1 style="color: black;font-size: 50px;"><b>AI CHATBOT</b></h1></center>
+  <div class="col"><a href="{% url 'Deploy_8' %}" class="button">LET'S GO TO EXPLORE</a><br><br>
+
+    <center>
+      <div>
+         <img src="{% static 'images/g.webp' %}" alt="biglogo" width="300" border="20">
+      </div>
+        <br>
+    </center>
+
+    <center><h1><b>THE GENERATIVE AI PROJECT<h1><b></center>
+    
+
+    <div class="col"><a href="{% url 'Per_Info_6' %}" class="button">PERSONAL INFORMATIONS</a>
+
+    <div class="col"><a href="{% url 'Per_Database_7' %}" class="button">PERSONAL_INFORMATION_DATABASE</a>
+
+</div>
+
+
+<center><h1><b>ARTIFICIAL INTELLIGENCE<h1><b></center>
+
+    <p>Artificial Intelligence (AI) refers to the development of computer systems that can perform tasks that 
+        typically require human intelligence. These tasks encompass a wide range of activities, including learning, 
+        reasoning, problem-solving, perception, and language understanding. AI systems are designed to emulate human 
+        cognitive functions and adapt to new information, allowing them to make decisions, recognize patterns, and
+         improve their performance over time. Machine learning, a subset of AI, involves the use of algorithms and 
+         statistical models to enable computers to learn from data and make predictions or decisions without explicit 
+         programming. AI applications are diverse and can be found in various industries, such as healthcare, finance,
+          manufacturing, and entertainment. As technology advances, the field of AI continues to evolve, 
+          raising questions about ethics, privacy, and the impact of automation on the workforce.</p>
+
+        <br>
+<center><h1><b>NATURAL LANGUAGE PROCESSING<h1><b></center>
+
+        <p>Natural Language Processing (NLP) is a field of artificial intelligence (AI) that focuses on the interaction
+               between computers and humans through natural language. The ultimate goal of NLP is to enable machines to understand,
+               interpret, and generate human language in a way that is both meaningful and contextually relevant.NLP involves the
+                development of algorithms and computational models that can analyze and process large volumes of textual data, 
+                allowing computers to perform tasks such as language translation, sentiment analysis, text summarization, and more.
+                 Key challenges in NLP include dealing with the inherent ambiguity, variability, and complexity of human language.
+               Through the use of techniques such as machine learning, deep learning, and linguistic rule-based approaches, 
+               NLP systems can be trained to recognize patterns, extract information, and derive meaning from text. Applications
+                of NLP are widespread and can be found in virtual assistants, chatbots, language translation services, sentiment
+                 analysis tools, and various other technologies aimed at enhancing human-computer interaction through natural 
+                 language understanding and generation.</p>
+           
+            <br>
+        
+<center><h1><b>GENERATIVE AI<h1><b></center>
+
+    <p>Generative AI is a subset of artificial intelligence that focuses on creating new content, 
+        such as text, images, music, or even entire virtual environments, based on patterns and examples from 
+        existing data. Unlike traditional AI, which primarily identifies patterns and makes decisions based on input
+         data, generative AI leverages models like Generative Adversarial Networks (GANs) and Variational Autoencoders
+          (VAEs) to produce novel outputs that resemble the training data. These models work by learning the underlying
+           structure of the data and then generating new instances that follow the same structure. This technology 
+           has vast applications, including content creation, design, entertainment, and even drug discovery, by 
+           enabling machines to simulate human-like creativity and innovation. As generative AI continues to evolve,
+            it promises to transform numerous industries by automating creative processes and generating high-quality,
+             original content at scale.</p>
+    <br>
+    
+    <center>
+        <div>
+        <img src="{% static 'images/d.png' %}" alt="biglogo" width="300" border="20">
+        </div>
+        <br>
+    </center>
+</body>
+</html>

@@ -1,0 +1,22 @@
+from django import forms
+from .models import UserPredictModel
+from . models import UserPersonalModel
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+
+
+class UserPredictForm(forms.ModelForm):
+    class Meta:
+        model = UserPredictModel
+        fields = ['text']
+
+class UserRegisterForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1', 'password2']
+        
+class UserPersonalForm(forms.ModelForm):
+    
+    class Meta:
+        model = UserPersonalModel
+        fields = '__all__'

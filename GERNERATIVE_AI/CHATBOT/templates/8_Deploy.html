@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+h1{
+    font-weight: 600;
+    font-size: 24px;
+}
+
+button{
+    cursor: pointer;
+}
+
+body{
+    overflow: hidden;
+    width: 100vw;
+    height: 100%;
+}
+
+:root{
+    --chatboxH: 45px;
+    --headerH: 55px;
+    --paddingF: 10px;
+}
+
+input[type=text]:focus, input[type=password]:focus{
+    background: rgb(238, 238, 238);
+}
+
+input[type=text]::placeholder, input[type=password]::placeholder{
+    color: coral;
+    font-weight: 500;
+}
+
+.messageBox .textA{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+#message{
+    resize: none;
+    padding: 18px 5px;
+    border-radius: 20px;
+    border: none;
+    background: rgb(230, 227, 255);
+    outline: none;
+    color: black;
+    font-size: 17px;
+    position: absolute;
+    width: 95%;
+    bottom: 0;
+}
+
+.button-s1 {
+    width: 40px;
+    padding: 5px;
+    border-radius: 6rem;
+    border: none;
+    background: transparent;
+    outline: none;
+    color: rgb(5, 5, 230);
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.button-s1 span{
+    font-size: calc(40px / 1.5) !important;
+}
+
+#genMeetLink a{
+    color: rgb(5, 5, 230);
+}
+
+.messageBox{
+    background-color: white;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: calc(var(--chatboxH) + 5px);
+    display: flex;
+    align-items: center;
+    padding: 7px 27px;
+}
+
+.nameAlert{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 130px;
+    border-radius: 20px;
+}
+
+.chatArea{
+    height: calc(100vh - var(--chatboxH));
+    width: 100%;
+    padding: 16px;
+    overflow-y: scroll;
+}
+
+.prof{
+    min-width: 35px;
+    min-height: 35px;
+    margin: auto 10px 0 10px;
+    background: black;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.messArea{
+    display: grid;
+    grid-row-gap: 10px;
+    font-size: 14px;
+}
+
+#sname{
+    margin-left: 11px;
+    margin-bottom: -6px;
+    color: rgb(87, 87, 87);
+}
+
+.message{
+    display: flex;
+    width: fit-content;
+    max-width: 40rem;
+    margin-bottom: 35px;
+}
+
+.otherM{
+    margin-right: auto;
+}
+
+.mMess{
+    margin-left: auto;
+    overflow: hidden;
+}
+
+.mMess .messArea .textM{
+    background-color: rgb(173, 157, 66);
+    color: white;
+    margin-left: auto;
+    transition: .6s cubic-bezier(.07,.76,.13,1.02);
+}
+
+.newMmess{
+    transform: translateY(100px) scale(3);
+}
+
+.otherM .messArea .textM{
+    background-color: white;
+}
+
+.mMess .messArea .textM a{
+    color: white;
+}
+
+.messArea .textM a{
+    font-weight: 500;
+}
+
+.message .textM{
+    width: fit-content;
+    border-radius: 10px;
+    padding: 10px;
+    -webkit-box-shadow: 0px 5px 8px 5px rgba(0,0,0,0.03); 
+    box-shadow: 0px 5px 8px 5px rgba(0,0,0,0.03);
+    font-size: 17px;
+}
+
+.welcomeMess{
+    text-align: center;
+    margin-top: var(--headerH);
+}
+
+.welcomeMess h1{
+    font-weight: 600;
+    font-size: 24px;
+}
+
+.welcomeMess .img video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.welcomeMess .img{
+    width: 4rem;
+    border-radius: 10%;
+    overflow: hidden;
+    height: 4rem;
+    margin: auto;
+}
+
+.shareLink{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -80%);
+    padding: 2rem;
+    background-color: white;
+    text-align: center;
+    border-radius: 15px;
+    transition: .4s;
+    display: none;
+    opacity: 0;
+    z-index: 2;
+}
+
+.shareLink button{
+    font-weight: 600;
+    color: blue;
+    width: 6rem;
+    margin-top: 5px;
+    border-radius: 11px;
+    height: 2rem;
+    border: none;
+    background: rgb(230, 227, 255);
+}
+
+.shareLink h1{
+    font-weight: 500;
+}
+
+.headerDet{
+    width: 100%;
+    height: var(--headerH);
+    position: fixed;
+    top: 0;
+    background-color: white;
+    -webkit-box-shadow: 0px 5px 8px 5px rgba(0,0,0,0.03); 
+    box-shadow: 0px 5px 8px 5px rgba(0,0,0,0.03);
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    transition: top 0.5s;
+}
+
+.moveTop{
+    top: -100px;
+}
+
+.headerDet .img{
+    overflow: hidden;
+    width: calc(var(--headerH) - 15px);
+    height: calc(var(--headerH) - 15px);
+    border-radius: 100%;
+}
+
+.chatDety{
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.headerDet .chatDety .img video{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.headerDet .chatDety, .nameC p, input{
+    margin-left: 15px;
+    font-weight: 500;
+    font-size: 18px
+}
+
+.nameC{
+    position: relative;
+    width: 193px;
+}
+
+#titleFirst{
+    width: 221px;
+    text-overflow: ellipsis;
+    overflow: hidden; 
+    white-space: nowrap;
+}
+
+.headerDet .chatDety .nameC input{
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform :translate(-2px, -2px);
+}
+
+.headerDet .tools{
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-column-gap: 10px;
+}
+
+.headerDet .tools button{
+    background: transparent;
+    border: none;
+    outline: none;
+    transition: .5s;
+}
+
+#goToDown{
+    height: 35px;
+    position: fixed;
+    bottom: var(--chatboxH);
+    right: 0;
+    margin-right: 12px;
+    width: 35px;
+    transition: 0.5s;
+}
+
+.downDowny{
+    bottom: -70px !important;
+}
+
+#goToDown span{
+    cursor: pointer;
+    font-size: 30px;
+}
+
+.showItem{
+    transform: translate(-50%, -50%);
+    opacity: 1;
+}
+
+.blackout{
+    display: none;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: .5s;
+    z-index: 1;
+}
+
+.blackShow{
+    opacity: 1;
+}
+
+.clickSettings{
+    transform: rotate(180deg);
+}
+
+.changeW{
+    transition: .7s;
+}
+
+.clickSettingsCont{
+    width: 75%;
+}
+
+.settingsBar{
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: -1;
+    height: 100%;
+    overflow: hidden;
+    width: 25%;
+    transform: translateX(400px);
+    transition: .67s;
+    padding:  46px 10px 0px 10px;
+    overflow-y: scroll;
+}
+
+.blueTarget{
+    color: blue;
+}
+
+.clickSettingsBar{
+    transform: translateX(0px);
+}
+
+.settingsBar .headerSet{
+    border-bottom: 1px solid rgb(199, 199, 199);
+    padding-bottom: 19px;
+    margin-bottom: 15px;
+}
+
+.errorsSide{
+    position: absolute;
+    bottom: 80px;
+    right: 30px;
+}
+
+.errorsSide .bubble{
+    background: rgba(255, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 12px;
+    width: 20rem;
+    opacity: 0;
+    transition: 1s;
+    transform: translateY(50px);
+    display: none;
+    margin-bottom: 10px;
+    z-index: 3;
+}
+
+.errorsSide #errorBubble{
+    background: rgba(255, 0, 0, 0.7);
+}
+
+.errorsSide #tipsBubble{
+    background: rgba(47, 0, 255, 0.7);
+}
+
+
+.errorsSide .bubble h1{
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.errorsSide .bubble span{
+    margin-right: 10px;
+}
+
+.errorsSide .bubble p{
+    margin-right: 10px;
+}
+
+.bubbleAfter{
+    opacity: 1 !important;
+    transform: translateY(0px) !important; 
+}
+
+.bubbleGone{
+    opacity: 0 !important;
+    transform: translateY(-50px) !important; 
+}
+
+.timeId{
+    text-align: center;
+    margin: 12px;
+    font-size: 13px;
+}
+
+
+::-webkit-scrollbar {    
+  width: 15px;
+height: 15px;
+border-left: #ededed solid 1px;
+background-color: #fcfcfc;
+border-top: #ededed solid 1px;
+    }
+
+::-webkit-scrollbar-thumb:hover{
+cursor: pointer;
+background: #c7c7c7;
+width: 15px;
+    background-clip: content-box;
+    border: 4px solid transparent;
+border-radius: 10px;
+}
+
+    ::-webkit-scrollbar-button {   
+ display: none;
+    }
+
+    ::-webkit-scrollbar-thumb {
+background: #dbdbdb;
+    background-clip: content-box;
+    border: 4px solid transparent;
+border-radius: 10px;
+
+    }
+
+
+
+
+    </style>
+</head>
+<body>
+    <body>
+        
+    <div class="mainChater">
+        <div class="headerDet">
+            <div class="chatDety">
+                <div class="img"><video src="https://res.cloudinary.com/duw2s4w0s/video/upload/v1620962563/HO%20TV%20assets/ezgif-6-38fc0e6aefa8_owq33f.mp4" alt="brainstorm video" autoplay></video></div>
+                <div class="nameC">
+                    <p class="roomTitle" id='titleFirst' class="roomTitle">GENERATIVE AI</p>
+                    <input type="text" name="room name" id="roomNameInput" class="roomTitle" value="Its BrainStorming">
+                </div>
+            </div>
+    
+            <div class="tools">
+                
+                <a href="{% url 'Home_4' %}" style="font-size: 20px;color: orange;"><b>HOME</b></a>
+            </div>
+        </div>
+     
+    <div class="blackout"></div>
+    
+        <div class="chatArea changeW">
+            <div class="chatMessages">
+                  <!--Start of Chat cont-->
+            <div class="welcomeMess">
+                <div class="img"><video src="https://res.cloudinary.com/duw2s4w0s/video/upload/v1620962563/HO%20TV%20assets/ezgif-6-38fc0e6aefa8_owq33f.mp4" alt="brainstorm video" autoplay></video></div>
+                <h1 class="roomTitle">What can i do for you today</h1>
+                <p id="copyLinker2" class="copyLinker2">AI CHATBOT</p>
+            </div>
+
+        {% if models %}
+            {% for model in models %}
+    
+            <div class="message mMess 1122334" data-number="1122334">
+                <div class="messArea">
+                    <p id="sname">QUESTIONS</p>
+                    <div class="textM">{{ model.text }}</div></div>
+                    <div class="prof" style="background-color: #ff7b54;"><p>Q</p></div>
+            </div>
+
+            <div class="message"><div class="prof"><p>A</p></div>
+            <div class="messArea">
+                <p id="sname">ANSWER</p>
+                <div class="textM">{{ model.label }}</div>
+            </div>
+            </div>
+            {% endfor %}
+            {% endif %}
+    
+
+    
+            
+        <form action="" method="post">
+        {% csrf_token %}
+            <div class="messageBox">
+
+                <div class="textA">
+                    <input id="message" name="text" type="text" placeholder="TYPE YOUR QUESTIONS"><br><br>
+                </div>
+                <button type="submit" style="color: #ff7b54;font-size: 20px;"><b>CLICK</b></button>
+            </div><br><br>
+
+       
+  
+        
+    </body>
+    
+
+
+
+    <script>
+        var roomValue = "#4987720",
+userId = '1122334',
+myRoomJson;
+$('.roomTitle').text("It's BrainStorming")
+$('#roomNameInput').val("It's BrainStorming")
+$('.copyLinker2').text(roomValue)
+$("textarea").keydown(function(e){
+    // Enter was pressed without shift key
+    if (e.key == 'Enter' && !e.shiftKey)
+    {
+        sendT();
+        e.preventDefault();
+    }
+});
+
+$("#send").click(sendT);
+
+function sendT(){
+    if($('.message').last().data("number") == userId){
+        //showErrors('tips', 'Tips', 'Press Ctrl + Shift to make a new line!');
+        $('.message .messArea').last().append('<div class="textM '+userId+' newMmess">'+$('#message').val()+'</div>')
+        var goup = setTimeout(function(){
+            $('.message .messArea .textM').last().removeClass('newMmess');
+        }, 10);
+        $('#message').val('')
+        goToBottom();
+      findText()
+    }
+}
+
+document.onload = goToBottom();
+
+var chatStatus = 1;
+$('.chatArea').on('scroll', function() {
+    if($(this).scrollTop() + $(this).innerHeight() < $(this)[0].scrollHeight - $('.message').last().innerHeight() ) {
+        newGoD()
+    }
+})
+
+findText()
+
+function findText(){
+    var message = document.querySelectorAll('.textM'),
+    i ;
+    for(i = 0; i < message.length; i++){
+        message[i].innerHTML = linkify(message[i].textContent);
+    }
+}
+var iaeou = 0;
+$("#settings").click(clickSetTrans);
+function clickSetTrans(){
+    if(iaeou == 0){
+        $('.settingsBar').addClass('clickSettingsBar')
+        $('.changeW').addClass('clickSettingsCont')
+        $('#settings').addClass('clickSettings');
+        iaeou = 1;
+    }else{
+        $('.settingsBar').removeClass('clickSettingsBar')
+        $('.changeW').removeClass('clickSettingsCont')
+        $('#settings').removeClass('clickSettings');
+        iaeou = 0;
+    }
+}
+
+function linkify(text) {
+    var urlRegex =/(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+    return text.replace(urlRegex, function(url) {
+        return '<a href="' + url + '" target="blank">' + url + "</a>";
+    });
+}
+
+$("#message").on("input", function() {
+    var textarea = document.querySelector("#message")
+    enteredText = textarea.value;
+    numberOfLineBreaks = (enteredText.match(/\n/g)||[]).length;
+    characterCount = enteredText.length + numberOfLineBreaks;
+    rowcount = numberOfLineBreaks + 1;
+    if(rowcount < 4){
+    $("#message").attr('rows', rowcount)
+    }
+});
+
+function newGoD(){
+    $("#goToDown").removeClass('downDowny')
+}
+
+$("#groupEdit").click(changeTitle);
+$("#titleFirst").click(changeTitle);
+
+function changeTitle(){
+    var input = $('#roomNameInput'),
+    regExp = /[a-zA-Z]/g;
+    input.attr('style', 'display:block;')
+    input.select();
+    input.focusout(function(){
+        if(input.val().trim().length > 5 && regExp.test(input.val().trim())){
+        $('.roomTitle').text(input.val())
+        input.attr('style', 'display:none;')
+        }else{
+            showErrors('Invalid Name', 'In making your Room Name, you must enter 5 or more LETTERS.');
+            input.val($('.roomTitle')[0].innerHTML);
+            console.log('Room title must be over 5 LETTERS.')
+            input.attr('style', 'display:none;')
+        }
+    })
+    input.keydown(function(e){
+        // Enter was pressed without shift key
+        if (e.key == 'Enter' && !e.shiftKey){
+        if(input.val().trim().length > 5 && regExp.test(input.val().trim())){
+            $('.roomTitle').text(input.val())
+                input.attr('style', 'display:none;')
+                e.preventDefault();
+            }else{
+                input.val($('.roomTitle')[0].innerHTML);
+                showErrors('error', 'Invalid Name', 'In making your Room Name, you must enter 5 or more LETTERS.');
+                console.log('Room title must be over 5 LETTERS.')
+                input.attr('style', 'display:none;')
+            }
+        }
+    });
+}
+
+function showErrors(type, title, details){
+    if(type == 'error'){
+    $('.errorsSide').append('<div class="bubble" id="errorBubble"><h1 class="erStatus"> <span class="material-icons">error</span>'+ title +'</h1><p class="erDetails">'+ details+'</p></div>');
+    }
+    if(type == 'tips'){
+    $('.errorsSide').append('<div class="bubble" id="tipsBubble"><h1 class="erStatus"> <span class="material-icons">tips_and_updates</span>'+ title +'</h1><p class="erDetails">'+ details+'</p></div>');
+    }
+    $('.bubble').attr('style', 'display:block;');
+
+    var start = setTimeout(function(){
+        $('.bubble').addClass('bubbleAfter');
+    }, 100);
+    var end = setTimeout(function(){
+        $('.bubble').first().removeClass('bubbleAfter');
+        $('.bubble').first().addClass('bubbleGone');
+    }, 5000);
+    var deleteEl = setTimeout(function(){
+        $('.bubble').first().remove();
+    }, 5700)
+}
+
+$("#goToDown").click(function(){
+    goToBottom();
+})
+
+function goToBottom(){
+    $("#goToDown").addClass('downDowny');
+    $('.chatArea').scrollTop($('.chatArea')[0].scrollHeight);
+}
+
+$("#linkCopy").click(function(){
+    var timer = setTimeout(function(){
+        $(".shareLink").addClass('showItem');
+        $(".blackout").addClass('blackShow');
+    }, 120);
+    var timer2 = setTimeout(function(){
+        $(".shareLink").attr('style', 'display: block');
+        $(".blackout").attr('style', 'display: block');
+
+    }, 100);
+
+    $(".blackout").click(function(){
+            $(".shareLink").removeClass('showItem');
+            $(".blackout").removeClass('blackShow');
+        var timer2 = setTimeout(function(){
+            $(".shareLink").attr('style', 'display: none');
+            $(".blackout").attr('style', 'display: none');
+    
+        }, 400);
+    }
+    )
+    $("#copyLinker").click(function(){
+        var dummy = document.querySelector("#copyvalue");
+        dummy.select();
+        document.execCommand("copy");
+    })
+})
+
+
+    </script>
+    
+</body>
+</html>
